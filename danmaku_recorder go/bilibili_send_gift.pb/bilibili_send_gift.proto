@@ -1,0 +1,153 @@
+syntax = "proto3";
+
+package bilibili_send_gift;
+
+option go_package = "./";
+
+message SendGift {
+  int64 uid = 1;
+  string uname = 2;
+  string face = 3;
+  string name_color = 4;
+  int32 guard_level = 5;
+  MedalInfo medal_info = 8;
+  BlindGift blind_gift = 9;
+  ComboSend combo_send = 10;
+  int32 num = 11;
+  Wealth wealth = 13;
+  SenderUinfo sender_uinfo = 15;
+}
+
+message MedalInfo {
+  int64 target_id = 1;
+  int32 guard_level = 2;
+  string medal_name = 6;
+  int32 medal_color = 7;
+  int32 medal_color_border = 8;
+  int32 medal_color_end = 9;
+  int32 medal_color_start = 10;
+  int32 is_lighted= 11;
+  int32 medal_level = 12;
+} 
+
+message BlindGift {
+  int32 blind_gift_config_id = 1;
+  int32 original_gift_id = 2;
+  string original_gift_name = 3;
+  string blind_action = 5;
+  int64 gift_tip_price = 6;
+}
+
+message ComboSend {
+  int32 gift_id = 1;
+  string gift_name = 2;
+  int32 gift_num = 3;
+  int32 combo_num = 4;
+  int64 total_coin = 5;
+  int64 price = 6;
+  int64 discount_price = 7;
+  string coin_type = 8;
+  string tid = 9;
+  int64 timestamp = 10; 
+  int32 super_gift_num = 11;
+  string combo_id = 12;
+  int32 demarcation = 13;
+  int64 combo_total_coin = 14;
+  int64 combo_stay_time = 15;
+  float magnification= 16;
+  string action = 18;
+  ReceiveUserInfo receive_user_info = 29;
+  ReceiverUinfo receiver_uinfo = 33;
+  FaceEffectV2 face_effect_v2 = 34;
+  GiftInfo gift_info = 35;
+  FaceEffect face_effect = 37;
+}
+
+message ReceiveUserInfo {
+  string uname = 1;
+  int64 uid = 2;
+}
+
+message ReceiverUinfo {
+  int64 uid = 1;
+  Base base = 2;
+}
+
+message SenderUinfo {
+  int64 uid = 1;
+  Base base = 2;
+  Medal medal = 3;
+}
+
+message Base {
+  string name = 1;
+  string face = 2;
+  int32 name_color = 3;
+  string name_color_str = 4;
+  bool is_mystery = 5;
+  OriginInfo origin_info = 6;
+  OfficialInfo official_info = 7;
+  string risk_ctrl_info = 8;
+}
+
+message OriginInfo {
+  string name = 1;
+  string face = 2;
+}
+
+message OfficialInfo {
+  string desc = 1;
+  int32 role = 2;
+  string title = 3;
+  int64 type = 4;
+}
+
+message Medal {
+  string name = 1;
+  int32 level = 2;
+  int32 color_border = 3;
+  int32 color_end = 4;
+  int32 color_level = 5;
+  int32 color_start = 6;
+  int32 id = 7;
+  string honor_icon = 8;
+  int32 is_light = 9;
+  int64 ruid = 10;
+  int32 guard_level = 11;
+  int32 score = 12;
+  string guard_icon = 13;
+  int32 typ = 14;
+  string v2_medal_color_border = 15;
+  string v2_medal_color_end = 16;
+  string v2_medal_color_start = 17;
+  string v2_medal_color_text = 18;
+  string v2_medal_color_level = 19;
+}
+
+message FaceEffectV2 {
+  int32 id = 1;
+  int32 type = 2;
+}
+
+message GiftInfo {
+  string img_basic = 1;
+  string webp = 2;
+  int64 effect_id = 3;
+  int64 has_imaged_gift = 4;
+  string gif = 5;
+}
+
+message FaceEffect {
+  int32 face_effect_type = 1;
+  repeated CandidateFaceEffects candidate_face_effects = 2;
+}
+
+message CandidateFaceEffects {
+  int32 effect_id = 1;
+  int32 source = 2;
+}
+
+message Wealth {
+  int32 wealth_level = 1;
+  string dm_icon_key = 2;
+}

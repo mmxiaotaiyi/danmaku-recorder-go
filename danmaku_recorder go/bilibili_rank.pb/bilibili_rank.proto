@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package bilibili_rank;
+
+option go_package = "./";
+
+message OnlineRankV3 {
+  string rank_type = 1;
+  bool leader = 2;
+  repeated RankUser online_list = 3;
+}
+
+message RankUser {
+  int64 uid = 1;
+  string face = 2;
+  string score = 3;
+  string uname = 4;
+  int32 rank = 5;
+  int32 guard_level = 6;
+  bool is_mystery = 7;
+  UserInfo uinfo = 8;
+}
+
+message UserInfo {
+  int64 uid = 1;
+  BaseInfo base = 2;
+  bool medal = 3;
+  bool wealth = 4;
+  bool title = 5;
+  GuardInfo guard = 6;
+  bool uhead_frame = 7;
+  bool guard_leader = 8;
+}
+
+message BaseInfo {
+  string name = 1;
+  string face = 2;
+  int32 name_color = 3;
+  bool is_mystery = 4;
+  RiskCtrlInfo risk_ctrl_info = 5;
+  OriginInfo origin_info = 6;
+  OfficialInfo official_info = 7;
+  string name_color_str = 8;
+}
+
+message RiskCtrlInfo {
+  string name = 1;
+  string face = 2;
+}
+
+message OriginInfo {
+  string name = 1;
+  string face = 2;
+}
+
+message OfficialInfo {
+  int32 role = 1;
+  string title = 2;
+  string desc = 3;
+  int32 type = 4;
+}
+message GuardInfo {
+  int32 level = 1;
+  string expired_str = 2;
+}

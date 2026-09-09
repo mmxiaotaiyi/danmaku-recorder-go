@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package bilibili_interact;
+
+option go_package = "./";
+
+message InteractMessage {
+  int64 uid = 1;
+  string uname = 2;
+  bool core_user_type = 3;
+  string uname_color = 4;
+  int32 msg_type = 5;
+  int64 roomid = 6;
+  int64 timestamp = 7;
+  int64 score = 8;
+  FansMedal fans_medal = 9;
+  bool group_medal = 10;
+  repeated int32 identities = 11;
+  Contribution contribution_v2 = 12;
+  string spread_desc = 13;
+  string spread_info = 14;
+  int64 trigger_time = 15;
+  int32 guard_level = 16;
+  int32 privilege_type = 17;
+  int32 tail_icon = 18;
+  string tail_text = 19;
+  bool is_mystery = 20;
+  int32 is_spread =21;
+  UserInfo uinfo = 22;
+  RelationTail relation_tail = 23;
+}
+
+message FansMedal {
+  int64 ruid = 1;
+  int32 medal_level = 2;
+  string medal_name = 3;
+  int32 medal_color = 4;
+  int32 medal_color_border = 5;
+  int32 medal_color_end = 6;
+  int32 medal_color_start = 7;
+  int32 is_lighted = 8;
+  int32 guard_level = 9;
+  int32 icon_id = 10;
+  string special = 11;
+  int64 anchor_roomid = 12;
+  int32 score = 13;
+}
+
+message UserInfo {
+  int64 uid = 1; 
+  UserBase base = 2;
+  Medal medal = 3;
+  Wealth wealth = 4;
+  bool guard_leader = 5;
+  Guard guard = 6;
+  bool title = 7;
+  bool uhead_frame = 8;
+}
+
+message RelationTail {
+  string tail_icon = 1;
+  string tail_guide_text = 2;
+  int32 tail_type = 3;
+}
+
+message UserBase {
+  string name = 1;
+  string face = 2;
+  bool is_mystery = 3;
+  bool official_info = 4;
+  bool origin_info = 5;
+  bool risk_ctrl_info = 6;
+  int32 name_color = 7;
+  string name_color_str = 8;
+}
+
+message Guard {
+  int32 level = 1;
+  string expired_str = 2;
+}
+
+message Medal {
+  string name = 1;
+  int32 level = 2;
+  int32 color_border = 3;
+  int32 color_end = 4;
+  int32 color_level = 5;
+  int32 color_start = 6;
+  int32 id = 7;
+  string honor_icon = 8;
+  int32 is_light = 9;
+  int64 ruid = 10;
+  int32 guard_level = 11;
+  int32 score = 12;
+  string guard_icon = 13;
+  int32 typ = 14;
+  string v2_medal_color_border = 15;
+  string v2_medal_color_end = 16;
+  string v2_medal_color_start = 17;
+  string v2_medal_color_text = 18;
+  string v2_medal_color_level = 19;
+}
+
+message Wealth {
+  int32 level = 1;
+  string dm_icon_key = 2;
+}
+
+message Contribution {
+  int32 grade = 1;
+  string rank_type = 2;
+  string text = 3;
+}

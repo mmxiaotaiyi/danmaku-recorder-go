@@ -222,7 +222,7 @@ func OnlineRankCount(rawData []byte, storage *stg.StorageService, roomId int) {
 	if !storage.LiveState {
 		now := time.Now().Unix()
 		last := storage.LastMsgTs.Load()
-		if now-last >= 300 || now-storage.EndTs > 7200 {
+		if now-last >= 300 || now-storage.EndTs > 28800 {
 			GlobalHandler.DelRoom(roomId)
 		}
 	}
@@ -562,23 +562,25 @@ func OnlineRankV3(rawData []byte, storage *stg.StorageService, roomId int) {
 	onlineRank, release := unmarshalRankV3(rawData)
 	defer release()
 
-	current := make([]stg.RankItem, 0, len(onlineRank.OnlineList))
-	for _, user := range onlineRank.OnlineList {
-		item := stg.RankItem{
-			UID:   user.Uid,
-			Name:  user.Uname,
-			Rank:  user.Rank,
-			Score: parseScoreInt(user.Score),
-		}
-		if user.Uinfo.Guard.Level != 0 {
-			item.Guard = &stg.RankGuard{
-				Level:      user.Uinfo.Guard.Level,
-				ExpiredStr: user.Uinfo.Guard.ExpiredStr,
+	if onlineRank.OnlineList != nil {
+		current := make([]stg.RankItem, 0, len(onlineRank.OnlineList))
+		for _, user := range onlineRank.OnlineList {
+			item := stg.RankItem{
+				UID:   user.Uid,
+				Name:  user.Uname,
+				Rank:  user.Rank,
+				Score: parseScoreInt(user.Score),
 			}
+			if user.Uinfo.Guard.Level != 0 {
+				item.Guard = &stg.RankGuard{
+					Level:      user.Uinfo.Guard.Level,
+					ExpiredStr: user.Uinfo.Guard.ExpiredStr,
+				}
+			}
+			current = append(current, item)
 		}
-		current = append(current, item)
+		applyOnlineRank(storage, current)
 	}
-	applyOnlineRank(storage, current)
 }
 
 func InteractWordV2(rawData []byte, storage *stg.StorageService, roomId int) {

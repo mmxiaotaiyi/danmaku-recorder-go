@@ -30,7 +30,7 @@
 程序根目录
 ├─ 程序.exe
 ├─ 配置文件             # schedule_config.json & up_info.jsonl
-├─ HHHH-MM-DD.log/     # 日志目录
+├─ HHHH-MM-DD.log      # 日志文件
 └─ danmaku/            # 弹幕数据根目录
    ├─ 房间号/         # 按直播间号分类
    │  ├─ HHHH-MM-DD/   # 按启动日期自动建文件夹（按CMD分类存储jsonl文件）
